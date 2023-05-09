@@ -1,0 +1,141 @@
+# Android Kernel
+*  ***Building And Flashing Android Kernel for Pixel 6A (Bluejay)***
+## Objective
+
+The Aosp kernel is to be integrated with our own AOSP build for the operations which can be done with kernel level.
+
+## Downloading Sources with Branch
+
+For downloading the sources for kernel we are using the Repo Tool and Create a directory and change to that directory by using below commands
+
+```
+mkdir Kernel_Root/ && cd Kernel_Root/
+```
+
+*  Open the **Kernel_Root** directory in the terminal window and initialize the Repo tool in this directory by using following command
+
+For Kernel Branches visit this [google kernel](https://android.googlesource.com/kernel/gs/).
+
+```
+repo init -u https://android.googlesource.com/kernel/manifest -b android-gs-bluejay-5.10-android12L-d2
+```
+
+*  After Repo initialization you need to download the source code by using the following command.
+```
+repo sync -j16
+```
+<span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.***
+
+## Changing the Android Kernel Name
+
+<span style="color:Red">NOTE:</span> ***Execute the all the commands in*** **Kernel_Root/** ***directory.***
+
+*  Identify the Following File. ***Kernel_Root/build/build.sh***
+```
+cd build
+gedit build.sh
+```
+*  After opeining the file find the **-d LTO_CLANG_THIN** and add the below lines after the above line.
+```
+-d LOCALVERSION_AUTO \
+--set-str LOCALVERSION "--VISHLESHAK-BLUEJAY--" \
+```
+
+## Compiling The Android Kernel
+*  To compile the kernel execute the following command.
+``` 
+BUILD_KERNEL=1 ./build_bluejay.sh
+```
+<span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.***
+
+## Booting the Kernels
+
+*  After the Successfull Completion of building the kernels the Image files are copied in to the ***out/mixed/dist*** path files named **Image.lz4 and boot.img**
+
+*  You can flash the Kernels by executing the following command from **Kernel_Root** directory.
+```
+adb reboot bootloader
+```
+*  below command is used to flash the **Image.lz4** file
+```
+fastboot boot out/mixed/dist/Image.lz4
+```
+*  below command is used to flash the **Boot image Partition**
+```
+fastboot flash boot out/mixed/dist/boot.img
+```
+*  below command is used to flash the **Vendor Boot image Partition**
+```
+fastboot flash vendor_boot out/mixed/dist/vendor_boot.img
+```
+*  below command is used to go into the **Fastboot Mode** 
+```
+fastboot reboot fastboot
+```
+*  below command is used to flash the Vendor Lodable Kernel modules 
+```
+fastboot flash vendor_dlkm out/mixed/dist/vendor_dlkm.img
+```
+*  Then Reboot the Device by using below command
+```
+fastboot reboot
+```
+<span style="color:Red">*NOTE:</span> After All Commands executed it is recomended to do Factory Reset of your device.*
+<!-- *NOTE: After All Commands executed it is recomended to do Factory Reset of your device.* -->
+
+## Embedding Kernel Image File into AOSP source Code
+
+### Initializing the **AOSP_Root**
+
+*  Open the **AOSP_ROOT** directory in Terminal and Execute the following commands
+```
+cd AOSP_ROOT/
+
+source build/envsetup.sh
+
+lunch
+```
+*  **lunch** command will list out all the available devices targets, you need to select the the device which your building for. (In my case it is Pixel 6a (Bluejay)),so i will select **aosp_bluejay-userdebug**.
+<figure markdown>
+  ![Image title](lunch_menu.png){ width="750" }
+</figure>
+
+### Copying Kernel Image files to AOSP
+*  Now copy all files in **Kernel_Root/out/mixed/dist/** to the **AOSP_Root/device/google/bluejay-kernel/** directory.
+
+<span style="color:Red">*NOTE:</span> Before copying all files take the backup of all files for in future if you want to revert back the changes.*
+
+### Building The AOSP Image file with Kernel
+*  Now execute the following command to build the new AOSP build Image.
+```
+make updatepackage -j16
+```
+*  With above command new AOSP Build Image is created in the following path **AOSP_Root/out/target/product/bluejay/**  with file name **aosp_bluejay-img-eng.cdac.zip** .The zip can flashed on to the mobile.
+
+### Flashing AOSP Image Files to the Device.
+To flash the AOSP Images Execute the following commands in **AOSP_Root/** directory.
+
+*  To go into Bootloader mode execute the following command
+```
+adb reboot bootloader
+```
+
+*  To flash the AOSP Image files execute the following command.
+```
+fastboot -w update out/target/product/bluejay/aosp_bluejay-img-eng.cdac.zip
+```
+
+
+## Verification
+
+*  to verify the Kernel is flashed or not connect the device to host system and execute the following commands in the terminal.
+
+```
+adb shell
+```
+now you will be in the shell of your device and then type your command with $ symbol.
+```
+$ uname -a
+```
+
+it will display the Kernel version string with you name and version.
