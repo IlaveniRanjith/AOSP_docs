@@ -1,7 +1,8 @@
-site_name: Android File Access Monitor at Kernel Level using UID
+site_name: AOSP and KERNEL Building, Compiling and Flashing 
 theme:
   icon:
     logo: fontawesome/solid/shield
+  favicon: android.svg
   name: material
   features:
     - navigation.tabs

@@ -133,7 +133,7 @@ fastboot -w update out/target/product/bluejay/aosp_bluejay-img-eng.cdac.zip
 ```
 adb shell
 ```
-now you will be in the shell of your device and then type your command with $ symbol.
+now you will be in the shell of your device and then type your command without **$** symbol.
 ```
 $ uname -a
 ```
