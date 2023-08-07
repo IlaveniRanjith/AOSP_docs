@@ -10,14 +10,18 @@ sudo apt upgrade
 
 ## Installing Necessary Tools
 *  To build and flash our device we need some tools to convert source code into binary file for that we need to execute the below command.
-```
-sudo apt install openssh-server screen python git openjdk-8-jdk android-tools-adb bc bison build-essential curl flex g++-multilib gcc-multilib gnupg gperf imagemagick lib32ncurses-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc yasm zip zlib1g-dev libtinfo5 libncurses5
+```cmd
+sudo apt install openssh-server screen python git openjdk-8-jdk android-tools-adb bc bison build-essential 
+curl flex g++-multilib gcc-multilib gnupg gperf imagemagick lib32ncurses-dev lib32readline-dev lib32z1-dev 
+liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool 
+squashfs-tools xsltproc yasm zip zlib1g-dev libtinfo5 libncurses5
 ```
 ## Downloading and setting the Repo Tool
 *  When we download Android source code from google, it has hundreds of git repositories. We need to handle those files for that we need a tool called repo tool, to download and set the path execute the following code.
-```
+```cmd
 sudo wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P /usr/local/sbin/
-
+```
+```cmd
 sudo chmod a+x /usr/local/sbin/repo
 ```
 *  We can test the repo tool by typing  ***repo*** . If we get the following, it should work.
@@ -55,7 +59,7 @@ cd ~/AOSP_Root
 ```
 repo init -u https://android.googlesource.com/platform/manifest -b android-13.0.0_r52
 ```
-*  If you are concern about space then use the following command with additional parameter *** --depth=1 ***
+*  If you are concern about space then use the following command with additional parameter ***"--depth=1"***
 ```
 repo init -u https://android.googlesource.com/platform/manifest -b android-13.0.0_r52 --depth=1
 ```
@@ -98,7 +102,7 @@ lunch
 ```
 aosp_lynx-userdebug
 ```
-<span style="color:Red">**NOTE:**</span>  <span style="color:green"> ***do the below changes perticular to my branch and device***</span>
+<span style="color:Red">**NOTE:**</span>  <span style="color:green"> ***do the below changes particular to my branch and device***</span>
 
 *  After lunch command execute the following command to build **otatools** which are required to build and package the flashable zip file.
 ```
@@ -113,11 +117,19 @@ cd build/make/core
 
 gedit Makefile
 ```
-*  Once you opened the above file identify the ***$(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS)*** this line and add below line after this line.  
+*  Once you opened the above file identify the line which is highlighted in the below screenshot.  
 <span style="color:Red">NOTE:</span> ***use "ctrl+f" to search the string.***
+
+![Before adding vendor_kernel_boot.img](pixel_7a_makefile.png)
+
+*  After the identifying the line add the below lines above highlighted text in the screenshot as shown in below screen shot.
+
 ```mk 
-$(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
+ifdef BUILDING_VENDOR_KERNEL_BOOT_IMAGE
+  $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK)
+endif
 ```
+![After adding vendor_kernel_boot.img](pixel_7a_makefile_after.png)
 
 *  Now goto the Root directory by typing the following command.
 ```

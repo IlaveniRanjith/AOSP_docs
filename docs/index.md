@@ -55,7 +55,7 @@ cd ~/AOSP_Root
 ```
 repo init -u https://android.googlesource.com/platform/manifest -b android-12.1.0_r12
 ```
-*  If you are concern about space then use the following command with additional parameter *** --depth=1 ***
+*  If you are concern about space then use the following command with additional parameter ***"--depth=1"***
 ```
 repo init -u https://android.googlesource.com/platform/manifest -b android-12.1.0_r12 --depth=1
 ```
@@ -89,7 +89,7 @@ Now successfully downloaded the full source code now we need to Build the source
 ```
 source build/envsetup.sh
 ```
-*  now you need to execute the following command to select the device specific build target.
+* now you need to execute the following command to select the device specific build target.
 ```
 lunch
 ```
@@ -98,7 +98,7 @@ lunch
 ```
 aosp_bluejay-userdebug
 ```
-<span style="color:Red">**NOTE:**</span>  <span style="color:green"> ***do the below changes perticular to my branch and device***</span>
+<span style="color:Red">**NOTE:**</span>  <span style="color:green"> ***do the below changes particular to my branch and device***</span>
 
 *  After lunch command execute the following command to build **otatools** which are required to build and package the flashable zip file.
 ```
@@ -113,7 +113,10 @@ cd build/make/core
 
 gedit Makefile
 ```
-*  Once you opened the above file identify the ***$(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS)*** this line and add below line after this line.  
+*  Once you opened the above file identify the following line
+      *  ***$(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS)*** 
+
+add below line after above line.  
 <span style="color:Red">NOTE:</span> ***use "ctrl+f" to search the string.***
 ```mk 
 $(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
