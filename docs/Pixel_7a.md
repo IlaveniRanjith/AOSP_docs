@@ -1,5 +1,5 @@
-# AOSP
-*  ***Building And Flashing AOSP for Pixel 6A (Bluejay)***
+# PIXEL 7A(Lynx)
+*  ***Building And Flashing AOSP for Pixel 7A (Lynx)***
 
 ## Preparing The Environment
 *  We need to keep our packages up to date to avoid errors due to older ones.
@@ -35,13 +35,13 @@ git config --global user.name "Your Name"
 ## Downloading the AOSP source code.
 *  Create a folder in our system and download the aosp source code in it.
 *  Make a note of the branch and build the id of the device which we want to build and flash.
-    *  Build Information for Pixel 6A (Bluejay)
-    *  Branch : ***SD2A.220601.001.A1***
-    *  Build TAG: ***android-12.1.0_r12***
+    *  Build Information for Pixel 7A (Lynx)
+    *  Branch : ***TQ3A.230605.012***
+    *  Build TAG: ***android-13.0.0_r52***
 
     For Code Names and branches see here [CodeNames](https://source.android.com/setup/start/build-numbers).
 
-    For device specific vendor binaries see here [DriverBinaries](https://dl.google.com/dl/android/aosp/google_devices-bluejay-sd2a.220601.001.a1-0145bbe6.tgz).
+    For device specific vendor binaries see here [DriverBinaries](https://dl.google.com/dl/android/aosp/google_devices-lynx-tq3a.230605.012-92add22f.tgz).
 
 *  To create folder enter the following commands in terminal
 ```
@@ -53,11 +53,11 @@ cd ~/AOSP_Root
 ```
 *  This command will initialize the sources that are required for the branch mentioned after the b tag.
 ```
-repo init -u https://android.googlesource.com/platform/manifest -b android-12.1.0_r12
+repo init -u https://android.googlesource.com/platform/manifest -b android-13.0.0_r52
 ```
 *  If you are concern about space then use the following command with additional parameter *** --depth=1 ***
 ```
-repo init -u https://android.googlesource.com/platform/manifest -b android-12.1.0_r12 --depth=1
+repo init -u https://android.googlesource.com/platform/manifest -b android-13.0.0_r52 --depth=1
 ```
 *  By executing the following command you can download the source code
 ```
@@ -66,16 +66,16 @@ repo sync -j30
 
 <span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.***
 
-*  After downloading the source code you need to download the Device specific vendor binaries From here [DriverBinaries](https://developers.google.com/android/drivers#bluejaysd2a.220601.001.a1) and download the correct binary file using build id and branch.
+*  After downloading the source code you need to download the Device specific vendor binaries From here [DriverBinaries](https://developers.google.com/android/drivers#lynxtq3a.230605.012) and download the correct binary file using build id and branch.
 
 *  After downloading Binaries Place them in the ***AOSP_Root/*** directory and extract the tar zip file using the following command.
 ```
-tar -xzf google_devices-bluejay-sd2a.220601.001.a1-0145bbe6.tgz
+tar -xzf google_devices-lynx-tq3a.230605.012-92add22f.tgz
 ```
 
-After extracting the above file you will get on shell script file named ***extract-google_devices-bluejay.sh***. execute the script file using following command.
+After extracting the above file you will get on shell script file named ***extract-google_devices-lynx.sh***. execute the script file using following command.
 ```
-./extract-google_devices-bluejay.sh
+./extract-google_devices-lynx.sh
 ```
 *  While executing these file, you need to type **I ACCEPT** when prompted in order to execute these successfully.
 
@@ -93,10 +93,10 @@ source build/envsetup.sh
 ```
 lunch
 ```
-*  the above command will show the list of avialable devices build targets you need to select your device specific target by typing corresponding number or name of the target ( in my case it is ***aosp_bluejay-userdebug*** )
+*  the above command will show the list of avialable devices build targets you need to select your device specific target by typing corresponding number or name of the target ( in my case it is ***aosp_lynx-userdebug*** )
 
 ```
-aosp_bluejay-userdebug
+aosp_lynx-userdebug
 ```
 <span style="color:Red">**NOTE:**</span>  <span style="color:green"> ***do the below changes perticular to my branch and device***</span>
 
@@ -130,7 +130,7 @@ make updatepackage -j20
 ```
 <span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.***
 
-*  After successfull completion of building source code you will get flashable zip file in the following path ***out/target/product/bluejay/*** file named ***aosp_bluejay-img-eng.cdac.zip***.
+*  After successfull completion of building source code you will get flashable zip file in the following path ***out/target/product/lynx/*** file named ***aosp_lynx-img-eng.cdac.zip***.
 
 *  the above file you can flash on to the device using **adb and fastboot** tools.
 
@@ -169,9 +169,9 @@ To unlock the bootloader of the device you have to follow below steps if not don
 ```
 adb reboot bootloader
 
-fastboot -w update out/target/product/bluejay/aosp_bluejay-img-eng.cdac.zip
+fastboot -w update out/target/product/lynx/aosp_lynx-img-eng.cdac.zip
 ```
 
 <span style="color:Red">NOTE:</span> ***Don't Remove your device until the above command executed sucessfully.***
 
-*  After successfull completion of above command you will redirect to Homepage of your device of custom ROM.
+*  After successfull completion of above command you will redirect to Homepage of your device of custom ROM. 
