@@ -11,7 +11,10 @@ sudo apt upgrade
 ## Installing Necessary Tools
 *  To build and flash our device we need some tools to convert source code into binary file for that we need to execute the below command.
 ```
-sudo apt install openssh-server screen python git openjdk-8-jdk android-tools-adb bc bison build-essential curl flex g++-multilib gcc-multilib gnupg gperf imagemagick lib32ncurses-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc yasm zip zlib1g-dev libtinfo5 libncurses5
+sudo apt install openssh-server screen python git openjdk-8-jdk android-tools-adb bc bison build-essential 
+curl flex g++-multilib gcc-multilib gnupg gperf imagemagick lib32ncurses-dev lib32readline-dev lib32z1-dev 
+liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool 
+squashfs-tools xsltproc yasm zip zlib1g-dev libtinfo5 libncurses5
 ```
 ## Downloading and setting the Repo Tool
 *  When we download Android source code from google, it has hundreds of git repositories. We need to handle those files for that we need a tool called repo tool, to download and set the path execute the following code.
@@ -41,7 +44,7 @@ git config --global user.name "Your Name"
 
     For Code Names and branches see here [CodeNames](https://source.android.com/setup/start/build-numbers).
 
-    For device specific vendor binaries see here [DriverBinaries](https://dl.google.com/dl/android/aosp/google_devices-bluejay-sd2a.220601.001.a1-0145bbe6.tgz).
+    For device specific vendor binaries see here [DriverBinaries](https://developers.google.com/android/drivers#bluejaysd2a.220601.001.a1 ).
 
 *  To create folder enter the following commands in terminal
 ```
@@ -63,10 +66,11 @@ repo init -u https://android.googlesource.com/platform/manifest -b android-12.1.
 ```
 repo sync -j30
 ```
+!!! info "<span style="color:Red">*NOTE*</span>"
+    ***The above command will take significant time depends upon the Internet speed and system configuration.***
+<!-- <span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.*** -->
 
-<span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.***
-
-*  After downloading the source code you need to download the Device specific vendor binaries From here [DriverBinaries](https://developers.google.com/android/drivers#bluejaysd2a.220601.001.a1) and download the correct binary file using build id and branch.
+*  After downloading the source code you need to download the Device specific vendor binaries From here [DriverBinaries](https://dl.google.com/dl/android/aosp/google_devices-bluejay-sd2a.220601.001.a1-0145bbe6.tgz) and download the correct binary file using build id and branch.
 
 *  After downloading Binaries Place them in the ***AOSP_Root/*** directory and extract the tar zip file using the following command.
 ```
@@ -77,13 +81,16 @@ After extracting the above file you will get on shell script file named ***extra
 ```
 ./extract-google_devices-bluejay.sh
 ```
+
 *  While executing these file, you need to type **I ACCEPT** when prompted in order to execute these successfully.
 
 Now successfully downloaded the full source code now we need to Build the source code.
 
 ## Building the AOSP Source Code
 
-<span style="color:Red">NOTE:</span> ***Before executing below commands make sure you are in*** **AOSP_Root/** ***Directory.***
+!!! info "<span style="color:Red">*NOTE*</span>"
+    Before executing below commands make sure you are in ***AOSP_Root/*** Directory.
+<!-- <span style="color:Red">NOTE:</span> ***Before executing below commands make sure you are in*** **AOSP_Root/** ***Directory.*** -->
 
 *  By executing following command all essential definitions provided by envsetup.sh are loaded into the current shell.
 ```
@@ -98,7 +105,10 @@ lunch
 ```
 aosp_bluejay-userdebug
 ```
-<span style="color:Red">**NOTE:**</span>  <span style="color:green"> ***do the below changes particular to my branch and device***</span>
+
+!!! info "<span style="color:Red">*NOTE*</span>"
+    <span style="color:green"> ***do the below changes Specific to my branch and device***</span>
+<!-- <span style="color:Red">**NOTE:**</span>  <span style="color:green"> ***do the below changes particular to my branch and device***</span> -->
 
 *  After lunch command execute the following command to build **otatools** which are required to build and package the flashable zip file.
 ```
@@ -114,10 +124,11 @@ cd build/make/core
 gedit Makefile
 ```
 *  Once you opened the above file identify the following line
-      *  ***$(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS)*** 
+!!! hint " "
+    ***$(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS)*** 
 
-add below line after above line.  
-<span style="color:Red">NOTE:</span> ***use "ctrl+f" to search the string.***
+
+add below line after above line. (<span style="color:Red">NOTE:</span> ***use "ctrl+f" to search the string.***)
 ```mk 
 $(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
 ```
@@ -131,7 +142,10 @@ croot
 ```
 make updatepackage -j20
 ```
-<span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.***
+
+!!! info "<span style="color:Red">*NOTE*</span>"
+    ***The above command will take significant time depends upon the Internet speed and system configuration.***
+<!-- <span style="color:Red">NOTE:</span> ***The above command will take significant time depends upon the Internet speed and system configuration.*** -->
 
 *  After successfull completion of building source code you will get flashable zip file in the following path ***out/target/product/bluejay/*** file named ***aosp_bluejay-img-eng.cdac.zip***.
 
@@ -149,7 +163,8 @@ To unlock the bootloader of the device you have to follow below steps if not don
 2.  Then goto developer options and enable **OEM unlocking** toggle and **USB debugging** toggle also.
 3.  Then execute the following commands on the terminal by connecting device to system.
        *  after connecting device allow the prompt if any shows on the device by ticking the mark of **Always allow from this computer**
-    ```
+    
+    ```cmd
     adb reboot bootloader
     
     fastboot flashing unlock
@@ -174,7 +189,8 @@ adb reboot bootloader
 
 fastboot -w update out/target/product/bluejay/aosp_bluejay-img-eng.cdac.zip
 ```
-
-<span style="color:Red">NOTE:</span> ***Don't Remove your device until the above command executed sucessfully.***
+!!! danger "<span style="color:Red">*NOTE*</span>"
+    ***Don't Remove your device until the above command executed sucessfully.***
+<!-- <span style="color:Red">NOTE:</span> ***Don't Remove your device until the above command executed sucessfully.*** -->
 
 *  After successfull completion of above command you will redirect to Homepage of your device of custom ROM.
