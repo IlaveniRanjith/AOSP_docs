@@ -41,10 +41,12 @@ cd build
 gedit build.sh
 ```
 *  After opeining the file find the **-d LTO_CLANG_THIN** and add the below lines after the above line.
-```
--d LOCALVERSION_AUTO \
---set-str LOCALVERSION "--VISHLESHAK-BLUEJAY--" \
-```
+
+!!! new ""
+      -d LOCALVERSION_AUTO \
+
+      --set-str LOCALVERSION "--VISHLESHAK-BLUEJAY--" \
+
 
 ## Compiling The Android Kernel
 *  To compile the kernel execute the following command.
@@ -116,6 +118,31 @@ lunch
 <!-- <span style="color:Red">*NOTE:</span> Before copying all files take the backup of all files for in future if you want to revert back the changes.* -->
 !!! info "<span style="color:Red">*NOTE*</span>"
     ***Before copying all files take the backup of all files for in future if you want to revert back the changes.***
+
+#### changing the Prebuilt boot image path
+
+* Identify the file named **BoardConfig-common.mk** in the path **AOSP_Root/device/google/gs101/** open the file and identify the following lines in the file
+
+!!! new ""
+    ==BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot.img)==
+
+    ==ifneq (,$(BOARD_PREBUILT_BOOTIMAGE))==
+
+    ==TARGET_NO_KERNEL := true==
+
+    ==else==
+
+    TARGET_NO_KERNEL := false
+
+    ==endif==
+
+Delete the Highlighted lines from the file and save the file and close it after deleting the file look like.
+<!-- except the bold line delete everything after deleting the above lines except bold it's look like -->
+
+!!! new ""
+    **TARGET_NO_KERNEL := false**
+
+*  by doing above change it won't refere to **prebuilt boot.img** instead it will create with our own **boot.img**
 
 ### Building The AOSP Image file with Kernel
 *  Now execute the following command to build the new AOSP build Image.

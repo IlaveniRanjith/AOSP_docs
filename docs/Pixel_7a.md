@@ -25,9 +25,9 @@ sudo wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P /usr/local
 sudo chmod a+x /usr/local/sbin/repo
 ```
 *  We can test the repo tool by typing  ***repo*** . If we get the following, it should work.
-```
-error: repo is not installed.  Use "repo init" to install it here.
-```
+!!! new "" 
+    error: repo is not installed.  Use "repo init" to install it here.    
+
 
 ## Configure the git tools
 *  Now we need to Configure the git tools by executing following commands

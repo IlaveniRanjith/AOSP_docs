@@ -3,14 +3,16 @@
 
 ## Preparing The Environment
 *  We need to keep our packages up to date to avoid errors due to older ones.
-```
+
+```cmd
 sudo apt update
 sudo apt upgrade
 ```
 
 ## Installing Necessary Tools
 *  To build and flash our device we need some tools to convert source code into binary file for that we need to execute the below command.
-```
+
+```cmd
 sudo apt install openssh-server screen python git openjdk-8-jdk android-tools-adb bc bison build-essential 
 curl flex g++-multilib gcc-multilib gnupg gperf imagemagick lib32ncurses-dev lib32readline-dev lib32z1-dev 
 liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool 
@@ -24,9 +26,8 @@ sudo wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P /usr/local
 sudo chmod a+x /usr/local/sbin/repo
 ```
 *  We can test the repo tool by typing  ***repo*** . If we get the following, it should work.
-```
-error: repo is not installed.  Use "repo init" to install it here.
-```
+!!! new "" 
+    error: repo is not installed.  Use "repo init" to install it here. 
 
 ## Configure the git tools
 *  Now we need to Configure the git tools by executing following commands
@@ -172,7 +173,7 @@ To unlock the bootloader of the device you have to follow below steps if not don
 
 4.  by executing above commands on the device it will show prompt and press the *Volume keys* untill it shows **"Unlock the bootloader"** option and then press *Power* button to confirm.
 
-5.  then you can see in the device options **Device state:Unlocked** in Red Color
+5.  then you can see in the device options <span style="color:Red">**Device state:Unlocked**</span>.
 6.  then execute the following command to go back to Homepage.
         ```
         fastboot reboot
