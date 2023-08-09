@@ -124,7 +124,7 @@ cd build/make/core
 gedit Makefile
 ```
 *  Once you opened the above file identify the following line
-!!! hint " "
+!!! new "" 
     ***$(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS)*** 
 
 
