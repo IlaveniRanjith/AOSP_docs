@@ -1,4 +1,5 @@
-# PIXEL 7A AOSP Kernel(Lynx)
+# PIXEL 7A Kernel
+
 *  ***Building And Flashing AOSP KERNEL for Pixel 7A (Lynx)***
 
 

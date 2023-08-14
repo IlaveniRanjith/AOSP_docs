@@ -1,5 +1,6 @@
-# AOSP
-*  ***Building And Flashing AOSP for Pixel 6A (Bluejay)***
+# Pixel 6A
+
+* ***Building And Flashing AOSP for Pixel 6A (Bluejay)***
 
 ## Preparing The Environment
 *  We need to keep our packages up to date to avoid errors due to older ones.

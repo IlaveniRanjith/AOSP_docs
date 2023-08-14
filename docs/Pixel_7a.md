@@ -1,4 +1,5 @@
-# PIXEL 7A(Lynx)
+# PIXEL 7A
+
 *  ***Building And Flashing AOSP for Pixel 7A (Lynx)***
 
 ## Preparing The Environment

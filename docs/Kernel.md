@@ -1,5 +1,7 @@
-# Android Kernel
-*  ***Building And Flashing Android Kernel for Pixel 6A (Bluejay)***
+# Pixel 6A Kernel
+
+* ***Building And Flashing Android Kernel for Pixel 6A (Bluejay)***
+
 ## Objective
 
 The Aosp kernel is to be integrated with our own AOSP build for the operations which can be done with kernel level.
