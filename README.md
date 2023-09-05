@@ -14,8 +14,8 @@ Kernel Branch: android-gs-bluejay-5.10-android12L-d2
 ## Pixel 7a
 
 ----------
-Build Id: TQ3A.230605.012
+Build id: TQ3A.230805.001
 
-Build TAG: android-13.0.0_r52
+Build TAG: android-13.0.0_r67
 
 Kernel Branch: android-gs-lynx-5.10-android13-qpr3
