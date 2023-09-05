@@ -34,11 +34,10 @@ sudo wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P /usr/local
 sudo chmod a+x /usr/local/sbin/repo
 ```
 
-*  We can test the repo tool by typing  ***repo*** . If we get the following, it should work.
-*  
+* We can test the repo tool by typing  ***repo*** . If we get the following, it should work.
+
 !!! new "" 
     error: repo is not installed.  Use "repo init" to install it here.
-
 
 ## Configure the git tools
 
@@ -64,24 +63,33 @@ git config --global user.name "Your Name"
 
     For device specific vendor binaries see here [DriverBinaries](https://developers.google.com/android/drivers#lynxtq3a.230805.001).
 
-*  To create folder enter the following commands in terminal
-```
+* To create folder enter the following commands in terminal
+
+```cmd
 mkdir ~/AOSP_Root
 ```
-*  To change the directory from current directory
-```
+
+* To change the directory from current directory
+
+```cmd
 cd ~/AOSP_Root
 ```
-*  This command will initialize the sources that are required for the branch mentioned after the b tag.
-```
+
+* This command will initialize the sources that are required for the branch mentioned after the b tag.
+
+```cmd
 repo init -u https://android.googlesource.com/platform/manifest -b android-13.0.0_r67
 ```
-*  If you are concern about space then use the following command with additional parameter ***"--depth=1"***
-```
+
+* If you are concern about space then use the following command with additional parameter ***"--depth=1"***
+
+```cmd
 repo init -u https://android.googlesource.com/platform/manifest -b android-13.0.0_r67 --depth=1
 ```
-*  By executing the following command you can download the source code
-```
+
+* By executing the following command you can download the source code
+
+```cmd
 repo sync -j30
 ```
 
